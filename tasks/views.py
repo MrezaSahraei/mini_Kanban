@@ -7,6 +7,10 @@ from .models import Task, User
 from rest_framework.response import Response
 # Create your views here.
 
+class UserListAPIView(generics.ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = User.objects.all()
 class TaskCreateAPIView(generics.CreateAPIView):
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]

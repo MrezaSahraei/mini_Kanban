@@ -1,6 +1,11 @@
 from rest_framework import serializers
 from .models import Task, User
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username','last_name', 'first_name']
+        read_only_fields = ['id']
 
 class TaskSerializer(serializers.ModelSerializer):
     #status_choices_display = serializers.CharField(source='get_STATUS_CHOICES_display()', read_only=True)
