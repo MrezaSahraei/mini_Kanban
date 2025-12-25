@@ -39,6 +39,35 @@ class TaskCreateAPIView(generics.CreateAPIView):
             {'message':'تسک با موفیقت ثبت شد و هم اکنون در ستون To Do است.'},
             status=status.HTTP_201_CREATED
         )
+class TaskDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Task.objects.filter(creator=self.request.user)
+
+    def perform_update(self, serializer):
+        instance = self.get_object()
+        updated_status = serializer.validated_data.get('status', instance.status)
+        updated_progress_percent = serializer.validated_data.get('progress_percent', instance.progress_percent)
+
+        if updated_status == 'IN_PROGRESS' and instance.status != 'IN_PROGRESS':
+            if updated_status == 0:
+                updated_status = 1
+
+        if updated_status == 'COMPLETED' and instance.status != 'COMPLETED':
+            updated_progress_percent = 100
+
+        if updated_progress_percent == 100:
+            updated_status = 'COMPLETED'
+        elif 0 < updated_progress_percent < 100:
+            updated_status = 'IN_PROGRESS'
+
+        serializer.save(
+            status=updated_status,
+            progress_percent=updated_progress_percent
+        )
+
 
 
 
