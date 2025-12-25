@@ -27,7 +27,7 @@ class TaskCreateAPIView(generics.CreateAPIView):
 
         task = Task.objects.create(
             creator=user,
-            progress_percent=0,
+            progress=0,
             status='TO_DO',
             **validated_data
         )
@@ -49,24 +49,37 @@ class TaskDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     def perform_update(self, serializer):
         instance = self.get_object()
         updated_status = serializer.validated_data.get('status', instance.status)
-        updated_progress_percent = serializer.validated_data.get('progress_percent', instance.progress_percent)
+        updated_progress= serializer.validated_data.get('progress_', instance.progress)
 
         if updated_status == 'IN_PROGRESS' and instance.status != 'IN_PROGRESS':
             if updated_status == 0:
                 updated_status = 1
 
         if updated_status == 'COMPLETED' and instance.status != 'COMPLETED':
-            updated_progress_percent = 100
+            updated_progress = 100
 
-        if updated_progress_percent == 100:
+        if updated_progress == 100:
             updated_status = 'COMPLETED'
-        elif 0 < updated_progress_percent < 100:
+        elif 0 < updated_progress< 100:
             updated_status = 'IN_PROGRESS'
 
         serializer.save(
             status=updated_status,
-            progress_percent=updated_progress_percent
+            progress_percent=updated_progress
         )
+
+class TasksListAPIView(generics.ListAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Task.objects.filter(creator=self.request.user)
+
+class AllTasksListAPIView(generics.ListAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [IsAdminUser]
+    queryset = Task.objects.all()
+
 
 
 

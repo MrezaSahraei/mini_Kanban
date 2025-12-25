@@ -16,10 +16,10 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ['id' , 'creator','creator_name', 'title', 'description',
-                  'progress_percent', 'assigned_to', 'status', 'created_at', 'updated_at']
+                  'progress', 'assigned_to', 'status', 'created_at', 'updated_at']
         read_only_fields = ['id', 'creator', 'creator_name' ,'created_at', 'updated_at']
 
-    def validate_progress_percent(self, value):
+    def validate_progress(self, value):
         if value <0 or value >100:
             raise serializers.ValidationError('درصد پیشرفت باید مقداری بین 0 تا 100 باشد')
         return value
