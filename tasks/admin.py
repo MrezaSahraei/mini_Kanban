@@ -5,5 +5,5 @@ from django.contrib import admin
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['id', 'status', 'progress_percent', 'creator']
+    list_display = ['id', 'status', 'progress', 'creator']
 

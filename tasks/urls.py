@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.authtoken import views as auth_view
-from .views import TaskCreateAPIView, UserListAPIView, TaskDetailAPIView, TasksListAPIView, AllTasksListAPIView
+from .views import (TaskCreateAPIView, UserListAPIView, TaskDetailAPIView,
+                    TasksListAPIView, AllTasksListAPIView, AssignedTasks)
 
 app_name = 'tasks'
 urlpatterns = [
@@ -11,5 +12,6 @@ urlpatterns = [
     path('detail/<int:pk>', TaskDetailAPIView.as_view(), name='tasks_detail'),
     path('list/', TasksListAPIView.as_view(), name='tasks_list'),
     path('all/', AllTasksListAPIView.as_view(), name='all_tasks'),
+    path('assigned/', AssignedTasks.as_view(), name='assigned_tasks')
 
 ]

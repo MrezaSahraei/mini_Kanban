@@ -80,7 +80,12 @@ class AllTasksListAPIView(generics.ListAPIView):
     permission_classes = [IsAdminUser]
     queryset = Task.objects.all()
 
+class AssignedTasks(generics.ListAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        return Task.objects.filter(assigned_to=self.request.user)
 
 
 
