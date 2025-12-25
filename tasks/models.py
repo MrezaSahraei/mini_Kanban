@@ -14,7 +14,7 @@ class Task(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_tasks')
     description = models.TextField()
     progress_percent = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
-    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assigned_tasks')
+    assigned_to = models.ManyToManyField(User, related_name='assigned_tasks')
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='TO_DO')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
