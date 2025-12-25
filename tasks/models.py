@@ -9,11 +9,11 @@ class Task(models.Model):
         ('IN_PROGRESS', 'In Progress'),
         ('COMPLETED', 'Completed'),
     ]
-
+    objects = models.Manager()
     title = models.CharField(max_length=100)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_tasks')
     description = models.TextField()
-    progress_percent = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    progress = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
     assigned_to = models.ManyToManyField(User, related_name='assigned_tasks')
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='TO_DO')
     created_at = models.DateTimeField(auto_now_add=True)
