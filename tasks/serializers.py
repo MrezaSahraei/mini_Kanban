@@ -4,7 +4,7 @@ from .models import Task, User
 class UserSerializer(serializers.ModelSerializer):
     last_name = serializers.CharField(required=False)
     first_name = serializers.CharField(required=False)
-    password = serializers.CharField(write_only=True, max_length=11)
+    password = serializers.CharField(write_only=True, max_length=10)
     class Meta:
         model = User
         fields = ['id', 'username', 'password','last_name', 'first_name']
@@ -13,8 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     #status_choices_display = serializers.CharField(source='get_STATUS_CHOICES_display()', read_only=True)
     creator_name = serializers.CharField(source='creator.username' ,read_only=True)
-    assigned_to = serializers.SlugRelatedField(many=True,queryset=User.objects.all(),slug_field='username'
-    )
+    assigned_to = serializers.SlugRelatedField(many=True,queryset=User.objects.all(),slug_field='username', required=False)
 
     class Meta:
         model = Task
