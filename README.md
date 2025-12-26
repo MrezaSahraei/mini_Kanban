@@ -64,7 +64,7 @@ POST tasks/login
 ```
 ## ▶️ Backend Setup (Django)
 ```bash
-git clone []
+git clone https://github.com/MrezaSahraei/mini_Kanban.git
 cd project
 python -m venv venv
 venv\Scripts\activate
