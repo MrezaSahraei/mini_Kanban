@@ -15,8 +15,8 @@ const Header: React.FC = () => {
               <LayoutDashboard className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h1 className="text-xl font-bold gradient-text">کانبان بورد</h1>
-              <p className="text-xs text-muted-foreground">مدیریت تسک‌های خود</p>
+              <h1 className="text-xl font-bold gradient-text">Mini kanban</h1>
+              <p className="text-xs text-muted-foreground">نرم افزار مدیریت تسک</p>
             </div>
           </div>
 

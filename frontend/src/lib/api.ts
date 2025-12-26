@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/';
 
 export interface User {
   id: number;
@@ -104,7 +104,7 @@ export const signup = async (data: SignupData): Promise<{ message: string; usern
 };
 
 export const login = async (data: LoginData): Promise<AuthResponse> => {
-  return apiRequest('/api-token-auth/', {
+  return apiRequest('/tasks/login/', {
     method: 'POST',
     body: JSON.stringify(data),
   });
@@ -145,7 +145,7 @@ export const getTaskDetail = async (id: number): Promise<Task> => {
 
 export const updateTask = async (id: number, data: UpdateTaskData): Promise<Task> => {
   return apiRequest(`/tasks/detail/${id}`, {
-    method: 'PUT',
+    method: 'PATCH',
     body: JSON.stringify(data),
   });
 };

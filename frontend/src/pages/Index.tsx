@@ -19,7 +19,7 @@ const Index: React.FC = () => {
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-20 w-72 h-72 bg-todo/20 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-inprogress/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-inprogress/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-completed/10 rounded-full blur-3xl animate-pulse-slow" />
         
         {/* Grid Pattern */}
@@ -31,27 +31,23 @@ const Index: React.FC = () => {
         <div className="text-center max-w-4xl mx-auto pt-16 pb-24">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 animate-slide-up">
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">مدیریت تسک‌ها به روش حرفه‌ای</span>
+            <span className="text-sm font-medium text-primary">نرم افزار مدیریت تسک</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            <span className="gradient-text">کانبان بورد</span>
+            <span className="gradient-text">Mini kanban</span>
             <br />
-            <span className="text-foreground">مدرن و هوشمند</span>
           </h1>
 
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            تسک‌های خود را به سادگی مدیریت کنید. با قابلیت drag & drop،
-            پیشرفت کارها را به صورت بصری دنبال کنید.
-          </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.1s' }}>
             <Button
               size="lg"
               onClick={() => navigate('/login')}
               className="h-14 px-8 text-lg font-semibold bg-primary hover:bg-primary/90 transition-all group"
             >
-              ورود به حساب
+              ورود به اکانت
               <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
             </Button>
             <Button
@@ -67,7 +63,7 @@ const Index: React.FC = () => {
 
         {/* Features Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div className="glass-card rounded-2xl p-6 column-todo glow-todo animate-slide-up" style={{ animationDelay: '0.4s' }}>
+          <div className="glass-card rounded-2xl p-6 column-todo glow-todo animate-slide-up" style={{ animationDelay: '0.1s' }}>
             <div className="p-3 rounded-xl bg-todo/20 w-fit mb-4">
               <ListTodo className="w-6 h-6 text-todo" />
             </div>
@@ -77,7 +73,7 @@ const Index: React.FC = () => {
             </p>
           </div>
 
-          <div className="glass-card rounded-2xl p-6 column-inprogress glow-inprogress animate-slide-up" style={{ animationDelay: '0.5s' }}>
+          <div className="glass-card rounded-2xl p-6 column-inprogress glow-inprogress animate-slide-up" style={{ animationDelay: '0.1s' }}>
             <div className="p-3 rounded-xl bg-inprogress/20 w-fit mb-4">
               <Clock className="w-6 h-6 text-inprogress" />
             </div>
@@ -87,22 +83,21 @@ const Index: React.FC = () => {
             </p>
           </div>
 
-          <div className="glass-card rounded-2xl p-6 column-completed glow-completed animate-slide-up" style={{ animationDelay: '0.6s' }}>
+          <div className="glass-card rounded-2xl p-6 column-completed glow-completed animate-slide-up" style={{ animationDelay: '0.1s' }}>
             <div className="p-3 rounded-xl bg-completed/20 w-fit mb-4">
               <CheckCircle2 className="w-6 h-6 text-completed" />
             </div>
             <h3 className="text-lg font-bold mb-2 text-completed">تکمیل شده</h3>
             <p className="text-muted-foreground text-sm">
-              تسک‌های تکمیل شده را ببینید و موفقیت‌ها را جشن بگیرید.
+              تسک‌های تکمیل شده را ببینید.
             </p>
           </div>
         </div>
 
-        {/* Logo */}
         <div className="text-center mt-24">
           <div className="inline-flex items-center gap-3 opacity-50">
             <LayoutDashboard className="w-6 h-6 text-primary" />
-            <span className="text-lg font-bold text-muted-foreground">Kanban Board</span>
+            <span className="text-lg font-bold text-muted-foreground"> Made by LOVE❤️ Mreza Sahraei </span>
           </div>
         </div>
       </div>

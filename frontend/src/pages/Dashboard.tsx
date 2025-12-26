@@ -152,7 +152,7 @@ const Dashboard: React.FC = () => {
       return;
     }
 
-    const newProgress = newStatus === 'COMPLETED' ? 100 : newStatus === 'IN_PROGRESS' ? 50 : 0;
+    const newProgress = newStatus === 'COMPLETED' ? 100 : newStatus === 'IN_PROGRESS' ? 1 : 0;
 
     try {
       await updateTask(draggedTask.id, {
@@ -174,10 +174,10 @@ const Dashboard: React.FC = () => {
       setDraggedTask(null);
     }
   };
-
-  const todoTasks = tasks.filter((t) => t.status === 'TO_DO');
-  const inProgressTasks = tasks.filter((t) => t.status === 'IN_PROGRESS');
-  const completedTasks = tasks.filter((t) => t.status === 'COMPLETED');
+console.log("Current Tasks Data:", tasks);
+const todoTasks = (tasks || []).filter(t => t.status === 'TO_DO');
+const inProgressTasks = (tasks || []).filter(t => t.status === 'IN_PROGRESS');
+const completedTasks = (tasks || []).filter(t => t.status === 'COMPLETED');
 
   if (!isAuthenticated) return null;
 
