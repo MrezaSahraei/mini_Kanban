@@ -13,11 +13,25 @@ class Task(models.Model):
     title = models.CharField(max_length=100)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_tasks')
     description = models.TextField()
-    progress = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    progress = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)],
+                                   null=True, blank=True)
     assigned_to = models.ManyToManyField(User, related_name='assigned_tasks')
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='TO_DO')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.status == 'TO_DO':
+             self.progress = 0
+        if self.status == 'COMPLETED':
+            self.progress = 100
+        if self.status == 'IN_PROGRESS' and (self.progress == 0 or self.progress == 100):
+            self.progress = 1
+
+        if self.progress == 100:
+            self.status = 'COMPLETED'
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.title} by {self.creator}'
