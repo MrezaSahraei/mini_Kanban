@@ -6,4 +6,5 @@ from django.contrib import admin
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display = ['id', 'status', 'progress', 'creator']
+    search_fields = ['status']
 

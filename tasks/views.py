@@ -49,7 +49,7 @@ class TaskDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     def perform_update(self, serializer):
         instance = self.get_object()
         updated_status = serializer.validated_data.get('status', instance.status)
-        updated_progress= serializer.validated_data.get('progress_', instance.progress)
+        updated_progress= serializer.validated_data.get('progress', instance.progress)
 
         if updated_status == 'IN_PROGRESS' and instance.status != 'IN_PROGRESS':
             if updated_status == 0:
@@ -87,6 +87,22 @@ class AssignedTasks(generics.ListAPIView):
     def get_queryset(self):
         return Task.objects.filter(assigned_to=self.request.user)
 
-
+class SignUpView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        username = serializer.validated_data.get('username')
+        password = serializer.validated_data.get('password')
+        return Response(
+            {'message': "ثبت‌نام با موفقیت انجام شد. حالا می‌توانید لاگین کنید.",
+                   "username": username,
+                    'password': password
+             },
+            status=status.HTTP_201_CREATED
+        )
 
 
